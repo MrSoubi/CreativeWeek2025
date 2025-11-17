@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private InputAction m_JumpAction;
     private bool m_IsJumping;
     private float m_Gravity;
+    private bool m_IsRunning;
     
     private void OnEnable()
     {
@@ -41,15 +43,18 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         m_Gravity = Physics.gravity.y;
+        m_IsRunning = false;
     }
 
     void Run()
     {
+        m_IsRunning = true;
         m_CurrentVelocity.x = m_Speed;
     }
     
     void Stop()
     {
+        m_IsRunning = false;
         m_CurrentVelocity = Vector3.zero;
     }
     
@@ -117,21 +122,9 @@ public class PlayerController : MonoBehaviour
     
     public void AttractToLanding(Transform landingTransform, float landingTime)
     {
+        Debug.Log(landingTime - m_MusicTime.Time);
         Stop();
         StopAllCoroutines();
-        StartCoroutine(AttractToLandingCoroutine(landingTransform, landingTime));
-    }
-
-    IEnumerator AttractToLandingCoroutine(Transform landingTransform, float landingTime)
-    {
-        Vector2 movementRemaining = (Vector2)landingTransform.position - (Vector2)transform.position;
-        float targetSpeed = movementRemaining.magnitude / (landingTime - m_MusicTime.Time);
-        Vector2 direction = (movementRemaining / targetSpeed).normalized;
-        while (m_MusicTime.Time < landingTime)
-        {
-            Vector2 movementThisFrame = direction * targetSpeed * Time.deltaTime;
-            transform.position += (Vector3)movementThisFrame;
-            yield return null;
-        }
+        transform.DOMove(landingTransform.position, landingTime-m_MusicTime.Time).SetEase(Ease.InExpo).OnComplete(Run);
     }
 }
