@@ -1,4 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -15,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [Header("Input")]
     [SerializeField] private InputActionReference m_JumpActionReference;
     [SerializeField] private InputActionReference m_MoveActionReference;
+    [SerializeField] private InputActionReference m_SlideActionReference;
 
     [Header("Ground Check")]
     [SerializeField] private float m_GroundCheckDistance = 0.1f;
@@ -28,7 +32,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_SlideAcceleration = 8f; // how fast speed increases when going downhill
     [SerializeField] private float m_SlideDeceleration = 0f; // how fast speed decreases when going uphill (0 = no decay)
     [SerializeField] private float m_MinIncomingSpeedForUphill = 1.5f; // minimum incoming speed along bar to allow uphill
-
+    [SerializeField] private RSE_EnableSliding m_EnableSliding;
+    [SerializeField] private RSE_DisableSliding m_DisableSliding;
+    [SerializeField] private float m_SlideAutoAttachWindow = 0.25f; // time window after detach where touching another bar auto-attaches
+    
     [Header("Boost")]
     [SerializeField] private LayerMask m_BoostLayer; // layer for boost objects
     [SerializeField] private float m_BoostMultiplier = 1.5f;
@@ -41,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
     private InputAction m_JumpAction;
     private InputAction m_MoveAction;
+    private InputAction m_SlideAction;
 
     // runtime state
     private Vector2 m_MoveInput = Vector2.zero;
@@ -52,13 +60,16 @@ public class PlayerController : MonoBehaviour
     private float m_PrevGravityScale = 1f;
     private float m_LastSlideDetachTime = -Mathf.Infinity;
     private float m_CurrentSlideSpeed = 0f;
-
+    private Vector3 m_LastVelocity = Vector3.zero;
+    private bool m_SlidingEnabled = false;
+    private Collider2D m_LastDetachedSlideCollider = null; // remember last detached collider to avoid immediate reattach
+    
     // Boost state
     private float m_BoostTimer = 0f;
     private float m_LastBoostTime = -Mathf.Infinity;
     private float m_BaseSpeed = 0f;
     private float m_BaseSlideSpeed = 0f;
-
+    
     private void OnEnable()
     {
         if (m_JumpActionReference != null)
@@ -82,6 +93,17 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (m_SlideActionReference != null)
+        {
+            m_SlideAction = m_SlideActionReference.action;
+            if (m_SlideAction != null)
+            {
+                m_SlideAction.performed += EnableSliding;
+                m_SlideAction.canceled += DisableSliding;
+                m_SlideAction.Enable();
+            }
+        }
+        
         if (m_Rigidbody2D == null)
         {
             m_Rigidbody2D = GetComponent<Rigidbody2D>();
@@ -117,6 +139,27 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void EnableSliding(InputAction.CallbackContext ctx)
+    {
+        m_SlidingEnabled = true;
+        m_EnableSliding.Triggered?.Invoke();
+    }
+    
+    void DisableSliding(InputAction.CallbackContext ctx)
+    {
+        if (m_IsSliding) return;
+        StartCoroutine(DisableSlidingAfterDelay(0.1f));
+    }
+    
+    IEnumerator DisableSlidingAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (m_IsSliding) yield return null;
+        m_SlidingEnabled = false;
+        DetachFromSlide();
+        m_DisableSliding.Triggered?.Invoke();
+    }
+    
     void Jump(InputAction.CallbackContext ctx)
     {
         if (m_Rigidbody2D == null) return;
@@ -154,6 +197,8 @@ public class PlayerController : MonoBehaviour
     {
         if (m_Rigidbody2D == null) return;
 
+        m_LastVelocity = m_Rigidbody2D.linearVelocity;
+        
         // Update boost timer
         if (m_BoostTimer > 0f)
         {
@@ -242,9 +287,15 @@ public class PlayerController : MonoBehaviour
     // Try to attach to a slide bar if the player is overlapping a slide layer collider
     private void TryAttachToSlideIfAvailable()
     {
+        // allow attach if sliding input is active OR if we're within the short auto-attach window after a detach
+        bool withinAutoAttachWindow = (Time.time - m_LastSlideDetachTime) <= m_SlideAutoAttachWindow;
+        if (!m_SlidingEnabled && !withinAutoAttachWindow) return;
         if (m_IsSliding) return;
-        // don't reattach immediately after detaching (e.g., jump) to avoid ping-pong
-        if (Time.time - m_LastSlideDetachTime < m_SlideDetachCooldown) return;
+        // don't reattach to the same bar immediately after detaching (use cooldown)
+        if (Time.time - m_LastSlideDetachTime < m_SlideDetachCooldown)
+        {
+            // we'll check the hit and block only if it's the same collider we just detached from
+        }
         if (m_SlideLayer == 0) return; // not configured
 
         // compute circle center same as ground check
@@ -263,6 +314,12 @@ public class PlayerController : MonoBehaviour
         Collider2D hit = Physics2D.OverlapCircle(circleCenter, m_GroundCheckRadius, m_SlideLayer);
         if (hit != null)
         {
+            // if we're within the detach cooldown window and this is the same collider we just left, don't attach
+            if (Time.time - m_LastSlideDetachTime < m_SlideDetachCooldown && hit == m_LastDetachedSlideCollider)
+            {
+                return;
+            }
+
             // Only attach if the player is approaching the slide from above (fell onto it)
             if (IsApproachingFromTop(hit, circleCenter))
             {
@@ -319,7 +376,7 @@ public class PlayerController : MonoBehaviour
         Vector2 incoming = Vector2.zero;
         if (m_Rigidbody2D != null)
         {
-            incoming = m_Rigidbody2D.linearVelocity;
+            incoming = m_LastVelocity;
         }
 
         // If we have almost no velocity, use the current horizontal input as a hint
@@ -343,57 +400,28 @@ public class PlayerController : MonoBehaviour
             chosen = (Vector2.Dot(dir, Vector2.down) < Vector2.Dot(altDir, Vector2.down)) ? altDir : dir;
         }
 
-        // If the chosen direction is uphill, require a minimum incoming speed along that direction to allow uphill.
-        // Otherwise, force the downhill direction.
-        bool chosenIsUphill = Vector2.Dot(chosen, Vector2.down) < 0f;
-        if (chosenIsUphill)
-        {
-            float incomingProjected = 0f;
-            if (m_Rigidbody2D != null)
-                incomingProjected = Vector2.Dot(m_Rigidbody2D.linearVelocity, chosen);
-            // if incoming projection is below threshold, switch to downhill (opposite)
-            if (incomingProjected < m_MinIncomingSpeedForUphill)
-            {
-                chosen = -chosen; // prefer downhill
-            }
-        }
-
         m_SlideDirection = chosen.normalized;
 
-        // initialize current slide speed from player's incoming velocity projected along the slide direction
-        float projected = 0f;
-        if (m_Rigidbody2D != null)
-            projected = Vector2.Dot(m_Rigidbody2D.linearVelocity, m_SlideDirection);
-        projected = Mathf.Max(0f, projected);
-
-        bool isDownhillInit = Vector2.Dot(m_SlideDirection, Vector2.down) > 0f;
-        if (isDownhillInit)
-        {
-            // start from the projected incoming speed (may accelerate up to m_SlideSpeed)
-            m_CurrentSlideSpeed = Mathf.Min(projected, m_SlideSpeed);
-        }
-        else
-        {
-            // uphill: speed cannot increase beyond incoming projection; clamp to max slide speed
-            m_CurrentSlideSpeed = Mathf.Min(projected, m_SlideSpeed);
-        }
-
         // Immediately set velocity to slide speed
-        m_Rigidbody2D.linearVelocity = m_SlideDirection * m_CurrentSlideSpeed;
+        m_Rigidbody2D.linearVelocity = m_SlideDirection * m_LastVelocity.magnitude;
     }
 
     private void DetachFromSlide()
     {
         if (!m_IsSliding) return;
-
+        
         m_IsSliding = false;
+        // remember the collider we just left so we don't immediately reattach to it
+        m_LastDetachedSlideCollider = m_CurrentSlideCollider;
         m_CurrentSlideCollider = null;
 
         // restore gravity
         m_Rigidbody2D.gravityScale = m_PrevGravityScale;
         m_LastSlideDetachTime = Time.time;
-    }
 
+        StartCoroutine(DisableSlidingAfterDelay(0.1f));
+    }
+    
     private bool IsOverlappingCollider(Collider2D c)
     {
         if (c == null) return false;
@@ -411,6 +439,7 @@ public class PlayerController : MonoBehaviour
 
         Collider2D hit = Physics2D.OverlapCircle(circleCenter, m_GroundCheckRadius, 1 << c.gameObject.layer);
         return hit == c;
+
     }
 
     // Try to pick up a boost object under the player

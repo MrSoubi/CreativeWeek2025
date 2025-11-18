@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1414414725139649660}
   - component: {fileID: 8765477410950252563}
   - component: {fileID: 2146456701900569870}
+  - component: {fileID: 8447098582085460936}
   m_Layer: 6
   m_Name: SlideBar
   m_TagString: Untagged
@@ -28,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3369797653657069570}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.93, y: 0.35, z: 0}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -149,11 +150,26 @@ PlatformEffector2D:
   m_UseColliderMask: 1
   m_ColliderMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_SurfaceArc: 170
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
+--- !u!114 &8447098582085460936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3369797653657069570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be7e6d292b7db541b36cfa57d7bcd4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SlideBarColliderManager
+  platformEffector2D: {fileID: 2146456701900569870}
+  m_EnableSliding: {fileID: 11400000, guid: 28b18239ae9631a47a099d19b6c93e87, type: 2}
+  m_DisableSliding: {fileID: 11400000, guid: af263e651a777994f93fee69a9573543, type: 2}
