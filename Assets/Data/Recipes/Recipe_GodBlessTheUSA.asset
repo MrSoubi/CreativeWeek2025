@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
+  m_Name: Recipe_GodBlessTheUSA
+  m_EditorClassIdentifier: Assembly-CSharp::Recipe
+  recipeName: God Bless The USA
+  ingredients:
+  - {fileID: 11400000, guid: ddbcab9d0b8b38d429924fa63b96d599, type: 2}
+  - {fileID: 11400000, guid: befb45ae7a91d0645af7eeff41d72e40, type: 2}
+  - {fileID: 11400000, guid: 653b7f49cdfb5cc4ea4fb3c14219e7c0, type: 2}
+  - {fileID: 11400000, guid: c8d941cad1800b94a81830363e768fe5, type: 2}
+  recipeSprite: {fileID: 0}

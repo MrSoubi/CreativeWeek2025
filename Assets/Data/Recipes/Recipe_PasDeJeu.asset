@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
+  m_Name: Recipe_PasDeJeu
+  m_EditorClassIdentifier: Assembly-CSharp::Recipe
+  recipeName: Pas De Jeu ?
+  ingredients:
+  - {fileID: 11400000, guid: 571690fc309bc924d9cbfb2f8e46e703, type: 2}
+  - {fileID: 11400000, guid: fac37dc7af3f6194483122ba6eddec69, type: 2}
+  recipeSprite: {fileID: 0}

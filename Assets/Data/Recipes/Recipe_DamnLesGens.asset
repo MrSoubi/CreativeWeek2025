@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
+  m_Name: Recipe_DamnLesGens
+  m_EditorClassIdentifier: Assembly-CSharp::Recipe
+  recipeName: Dman Les Gens !
+  ingredients:
+  - {fileID: 11400000, guid: 4b8b86ebfc162694488be7eb741735ed, type: 2}
+  - {fileID: 11400000, guid: 82daa795e08feed45b4be83011d4ca73, type: 2}
+  - {fileID: 11400000, guid: a6a6bd8fa5407404a8132bdbf0264580, type: 2}
+  recipeSprite: {fileID: 0}

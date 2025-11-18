@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
-  m_Name: Recipe_SuperDwitch
+  m_Name: Recipe_DiscordKitten
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeName: Super Dwitch
+  recipeName: Discord Kitten
   ingredients:
-  - {fileID: 11400000, guid: 32702c9eec197af4d876a0c6737a6d37, type: 2}
-  - {fileID: 11400000, guid: 867d8d9b042e2144c8f70c5aad6e7451, type: 2}
-  - {fileID: 11400000, guid: 96f27f6f409a21c44abd5c5b0a353820, type: 2}
-  - {fileID: 11400000, guid: b47635d19f38d1946a9f0e45df5a51f3, type: 2}
+  - {fileID: 11400000, guid: ddbcab9d0b8b38d429924fa63b96d599, type: 2}
+  - {fileID: 11400000, guid: dc3d1341a2878c046900d60627d7e960, type: 2}
+  - {fileID: 11400000, guid: 96f0275a244c91e4289191674a1bfce6, type: 2}
+  recipeSprite: {fileID: 0}
