@@ -197,8 +197,11 @@ public class PlayerController : MonoBehaviour
     {
         if (m_Rigidbody2D == null) return;
 
-        m_LastVelocity = m_Rigidbody2D.linearVelocity;
-        
+        if (m_Rigidbody2D.linearVelocity.magnitude > 0.1f)
+        {
+            m_LastVelocity = m_Rigidbody2D.linearVelocity;
+        }
+
         // Update boost timer
         if (m_BoostTimer > 0f)
         {
@@ -212,6 +215,7 @@ public class PlayerController : MonoBehaviour
         // If currently sliding, override movement and stick to the bar
         if (m_IsSliding)
         {
+
             // progressive slide speed: accelerate if downhill, do not increase if uphill
             bool isDownhill = Vector2.Dot(m_SlideDirection, Vector2.down) > 0f;
             if (isDownhill)
@@ -289,6 +293,7 @@ public class PlayerController : MonoBehaviour
     {
         // allow attach if sliding input is active OR if we're within the short auto-attach window after a detach
         bool withinAutoAttachWindow = (Time.time - m_LastSlideDetachTime) <= m_SlideAutoAttachWindow;
+
         if (!m_SlidingEnabled && !withinAutoAttachWindow) return;
         if (m_IsSliding) return;
         // don't reattach to the same bar immediately after detaching (use cooldown)
@@ -314,6 +319,7 @@ public class PlayerController : MonoBehaviour
         Collider2D hit = Physics2D.OverlapCircle(circleCenter, m_GroundCheckRadius, m_SlideLayer);
         if (hit != null)
         {
+
             // if we're within the detach cooldown window and this is the same collider we just left, don't attach
             if (Time.time - m_LastSlideDetachTime < m_SlideDetachCooldown && hit == m_LastDetachedSlideCollider)
             {
@@ -344,6 +350,7 @@ public class PlayerController : MonoBehaviour
         // If the player is not on the top side (dot <= small threshold), don't attach
         float dotPos = Vector2.Dot(toPlayer, barNormal);
         const float kTopThreshold = 0.02f;
+
         if (dotPos <= kTopThreshold) return false;
 
         // Ensure the player is moving toward the bar (relative to the bar normal) or at least not moving away
@@ -402,14 +409,24 @@ public class PlayerController : MonoBehaviour
 
         m_SlideDirection = chosen.normalized;
 
-        // Immediately set velocity to slide speed
-        m_Rigidbody2D.linearVelocity = m_SlideDirection * m_LastVelocity.magnitude;
+        // Initialize current slide speed so FixedUpdate doesn't immediately zero velocity.
+        // Use the best available estimate: prefer cached m_LastVelocity, fall back to current rigidbody velocity.
+        float estimatedSpeed = Mathf.Max(m_LastVelocity.magnitude, m_Rigidbody2D != null ? m_Rigidbody2D.linearVelocity.magnitude : 0f);
+        m_CurrentSlideSpeed = Mathf.Clamp(estimatedSpeed, 0f, m_SlideSpeed);
+        if (m_CurrentSlideSpeed < 0.01f)
+        {
+            // small nudge to avoid being stuck if incoming velocity is nearly zero
+            m_CurrentSlideSpeed = Mathf.Min(0.1f * m_SlideSpeed, m_SlideSpeed);
+        }
+
+        // Immediately set velocity to slide speed (use m_CurrentSlideSpeed so FixedUpdate keeps it)
+        m_Rigidbody2D.linearVelocity = m_SlideDirection * m_CurrentSlideSpeed;
     }
 
     private void DetachFromSlide()
     {
         if (!m_IsSliding) return;
-        
+
         m_IsSliding = false;
         // remember the collider we just left so we don't immediately reattach to it
         m_LastDetachedSlideCollider = m_CurrentSlideCollider;
@@ -421,7 +438,7 @@ public class PlayerController : MonoBehaviour
 
         StartCoroutine(DisableSlidingAfterDelay(0.1f));
     }
-    
+
     private bool IsOverlappingCollider(Collider2D c)
     {
         if (c == null) return false;
