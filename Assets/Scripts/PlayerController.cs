@@ -29,6 +29,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_SlideDeceleration = 0f; // how fast speed decreases when going uphill (0 = no decay)
     [SerializeField] private float m_MinIncomingSpeedForUphill = 1.5f; // minimum incoming speed along bar to allow uphill
 
+    [Header("Boost")]
+    [SerializeField] private LayerMask m_BoostLayer; // layer for boost objects
+    [SerializeField] private float m_BoostMultiplier = 1.5f;
+    [SerializeField] private float m_BoostDuration = 2f;
+    [SerializeField] private float m_BoostPickupCooldown = 0.2f; // small safety cooldown
+
     [Header("Components")]
     [SerializeField] private Rigidbody2D m_Rigidbody2D;
     [SerializeField] private Collider2D m_Collider2D;
@@ -46,6 +52,12 @@ public class PlayerController : MonoBehaviour
     private float m_PrevGravityScale = 1f;
     private float m_LastSlideDetachTime = -Mathf.Infinity;
     private float m_CurrentSlideSpeed = 0f;
+
+    // Boost state
+    private float m_BoostTimer = 0f;
+    private float m_LastBoostTime = -Mathf.Infinity;
+    private float m_BaseSpeed = 0f;
+    private float m_BaseSlideSpeed = 0f;
 
     private void OnEnable()
     {
@@ -83,6 +95,10 @@ public class PlayerController : MonoBehaviour
             if (m_Collider2D == null)
                 Debug.LogWarning("PlayerController: Collider2D not assigned and not found on the GameObject. Ground check may be unreliable.");
         }
+
+        // store base speeds for boost restore
+        m_BaseSpeed = m_Speed;
+        m_BaseSlideSpeed = m_SlideSpeed;
     }
 
     private void OnDisable()
@@ -138,6 +154,16 @@ public class PlayerController : MonoBehaviour
     {
         if (m_Rigidbody2D == null) return;
 
+        // Update boost timer
+        if (m_BoostTimer > 0f)
+        {
+            m_BoostTimer -= Time.fixedDeltaTime;
+            if (m_BoostTimer <= 0f)
+            {
+                EndBoost();
+            }
+        }
+
         // If currently sliding, override movement and stick to the bar
         if (m_IsSliding)
         {
@@ -189,6 +215,9 @@ public class PlayerController : MonoBehaviour
         Vector2 lv = m_Rigidbody2D.linearVelocity;
         lv.x = newX;
         m_Rigidbody2D.linearVelocity = lv;
+
+        // Try to pick up a boost object under the player
+        TryPickupBoostIfAvailable();
     }
 
     bool IsGrounded()
@@ -382,6 +411,76 @@ public class PlayerController : MonoBehaviour
 
         Collider2D hit = Physics2D.OverlapCircle(circleCenter, m_GroundCheckRadius, 1 << c.gameObject.layer);
         return hit == c;
+    }
+
+    // Try to pick up a boost object under the player
+    private void TryPickupBoostIfAvailable()
+    {
+        if (Time.time - m_LastBoostTime < m_BoostPickupCooldown) return;
+        if (m_BoostLayer == 0) return;
+
+        Vector2 circleCenter;
+        if (m_Collider2D != null)
+        {
+            Bounds b = m_Collider2D.bounds;
+            circleCenter = new Vector2(b.center.x, b.min.y) + Vector2.down * (m_GroundCheckDistance * 0.5f);
+        }
+        else
+        {
+            circleCenter = (Vector2)transform.position + Vector2.down * (m_GroundCheckDistance);
+        }
+
+        Collider2D hit = Physics2D.OverlapCircle(circleCenter, m_GroundCheckRadius, m_BoostLayer);
+        if (hit != null)
+        {
+            // Boosts are consumable objects: trigger immediately and destroy the object
+            StartBoost();
+            m_LastBoostTime = Time.time;
+            // Destroy the boost object so it can't be reused
+            if (Application.isPlaying)
+            {
+                Destroy(hit.gameObject);
+            }
+            else
+            {
+                // In editor edit mode, destroy immediately
+                DestroyImmediate(hit.gameObject);
+            }
+        }
+    }
+
+    private void StartBoost()
+    {
+        // Refresh timer if already boosting
+        if (m_BoostTimer > 0f)
+        {
+            m_BoostTimer = m_BoostDuration;
+            return;
+        }
+
+        // store current bases (in case they changed)
+        m_BaseSpeed = m_Speed;
+        m_BaseSlideSpeed = m_SlideSpeed;
+
+        // apply multiplier
+        m_Speed = m_BaseSpeed * m_BoostMultiplier;
+        m_SlideSpeed = m_BaseSlideSpeed * m_BoostMultiplier;
+        m_CurrentSlideSpeed = m_CurrentSlideSpeed * m_BoostMultiplier;
+
+        m_BoostTimer = m_BoostDuration;
+    }
+
+    private void EndBoost()
+    {
+        m_BoostTimer = 0f;
+        // restore base speeds
+        m_Speed = m_BaseSpeed;
+        m_SlideSpeed = m_BaseSlideSpeed;
+        // if currently sliding, ensure current slide speed is not above the restored max
+        if (m_IsSliding)
+        {
+            m_CurrentSlideSpeed = Mathf.Min(m_CurrentSlideSpeed, m_SlideSpeed);
+        }
     }
 
     void OnDrawGizmos()
