@@ -6,7 +6,7 @@ public class IngredientPickup : MonoBehaviour
     public Ingredient ingredient;
     public UnityEvent<Ingredient> onPickup;
     [SerializeField] private SpriteRenderer ingredientSprite;
-
+    [SerializeField] private RSE_OnIngredientPickedUp m_OnIngredientPickedUp;
     public void Initialize(Ingredient ingredient)
     {
         this.ingredient = ingredient;
@@ -17,9 +17,8 @@ public class IngredientPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Logic to add the ingredient to the player's inventory
-            Debug.Log("Picked up: " + ingredient.ingredientName);
             onPickup.Invoke(ingredient);
+            m_OnIngredientPickedUp.onPickup.Invoke(ingredient);
             Destroy(gameObject);
         }
     }

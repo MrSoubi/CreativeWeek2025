@@ -51,6 +51,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   ingredientSprite: {fileID: 5034238357311019654}
+  m_OnIngredientPickedUp: {fileID: 11400000, guid: 6510fd33f0d60a247a0a192535faa3a1, type: 2}
 --- !u!212 &5034238357311019654
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -6,19 +6,10 @@ using UnityEngine.UI;
 public class RecipeUIManager : MonoBehaviour
 {
     [SerializeField] RSO_CurrentRecipe currentRecipe;
-    
+    [SerializeField] GameObject ingredientUIPrefab;
     [SerializeField] private TextMeshProUGUI recipeNameText;
-    [SerializeField] private TextMeshProUGUI ingredient1NameText;
-    [SerializeField] private TextMeshProUGUI ingredient2NameText;
-    [SerializeField] private TextMeshProUGUI ingredient3NameText;
-    [SerializeField] private TextMeshProUGUI ingredient4NameText;
-    
     [SerializeField] private Image recipeSprite;
-    [SerializeField] private Image ingredient1Sprite;
-    [SerializeField] private Image ingredient2Sprite;
-    [SerializeField] private Image ingredient3Sprite;
-    [SerializeField] private Image ingredient4Sprite;
-
+    [SerializeField] private Transform ingredientsParent;
     private void OnEnable()
     {
         currentRecipe.OnValueChanged.AddListener(SetRecipe);
@@ -31,15 +22,19 @@ public class RecipeUIManager : MonoBehaviour
 
     public void SetRecipe(Recipe recipe)
     {
+        foreach (Transform child in ingredientsParent)
+        {
+            Destroy(child.gameObject);
+        }
+        
         recipeNameText.text = recipe.recipeName;
         recipeSprite.sprite = recipe.recipeSprite;
-        ingredient1NameText.text = recipe.ingredients[0].ingredientName;
-        ingredient1Sprite.sprite = recipe.ingredients[0].ingredientSprite;
-        ingredient2NameText.text = recipe.ingredients[1].ingredientName;
-        ingredient2Sprite.sprite = recipe.ingredients[1].ingredientSprite;
-        ingredient3NameText.text = recipe.ingredients[2].ingredientName;
-        ingredient3Sprite.sprite = recipe.ingredients[2].ingredientSprite;
-        ingredient4NameText.text = recipe.ingredients[3].ingredientName;
-        ingredient4Sprite.sprite = recipe.ingredients[3].ingredientSprite;
+
+        foreach (Ingredient ingredient in recipe.ingredients)
+        {
+            GameObject ingredientUIObj = Instantiate(ingredientUIPrefab, ingredientsParent);
+            IngredientUI ingredientUI = ingredientUIObj.GetComponent<IngredientUI>();
+            ingredientUI.SetIngredient(ingredient);
+        }
     }
 }
