@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dcc9714152361134c9cebb079080fd03
+guid: aaf55fc7ca1713d41809f2e85c09a28e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7164548076546111688
-    second: ville_blockout_0
+      213: 2254511495401051066
+    second: ville_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,24 +96,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ville_blockout_0
+      name: ville_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8c83db624869d6360800000000000000
-      internalID: 7164548076546111688
+      spriteID: ab31a699242a94f10800000000000000
+      internalID: 2254511495401051066
       vertices: []
       indices: 
       edges: []
@@ -138,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ville_blockout_0: 7164548076546111688
+      ville_0: 2254511495401051066
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

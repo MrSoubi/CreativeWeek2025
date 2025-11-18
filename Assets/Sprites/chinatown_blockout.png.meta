@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: dcc9714152361134c9cebb079080fd03
+guid: 7153fe9f9ca113c48ac58abc9843f524
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7164548076546111688
-    second: ville_blockout_0
+      213: -1850770849484111985
+    second: chinatown_blockout_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ville_blockout_0
+      name: chinatown_blockout_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2161
-        height: 1085
+        width: 1788
+        height: 894
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8c83db624869d6360800000000000000
-      internalID: 7164548076546111688
+      spriteID: f8ff9dbd7bdb056e0800000000000000
+      internalID: -1850770849484111985
       vertices: []
       indices: 
       edges: []
@@ -148,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ville_blockout_0: 7164548076546111688
+      chinatown_blockout_0: -1850770849484111985
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
