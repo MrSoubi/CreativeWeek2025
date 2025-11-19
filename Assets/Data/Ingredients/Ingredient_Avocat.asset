@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa2469d5d061cb4887f91c6c431eb29, type: 3}
   m_Name: Ingredient_Avocat
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientName: Avocat
+  ingredientName: AVOCAT
   ingredientSprite: {fileID: -4774173801191175605, guid: c16e427c8b56de3479c2d52ef6b74ec6, type: 3}

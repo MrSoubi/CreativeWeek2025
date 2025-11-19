@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa2469d5d061cb4887f91c6c431eb29, type: 3}
   m_Name: Ingredient_Harissa
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientName: Harissa
+  ingredientName: HARISSA
   ingredientSprite: {fileID: 120917907506126235, guid: 93f1d6b84fdf7e64fb121a87fdcdb486, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
   m_Name: Recipe_ArretMaladie
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeName: "Arr\xEAt Maladie"
+  recipeName: ARRET MALADIE
   ingredients:
   - {fileID: 11400000, guid: 48a3a9d4bef4d044f85da96cd7e969d0, type: 2}
   - {fileID: 11400000, guid: ddbcab9d0b8b38d429924fa63b96d599, type: 2}

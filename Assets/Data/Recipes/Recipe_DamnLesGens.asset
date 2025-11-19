@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
   m_Name: Recipe_DamnLesGens
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeName: Dman Les Gens !
+  recipeName: DAMN LES GENS
   ingredients:
   - {fileID: 11400000, guid: 4b8b86ebfc162694488be7eb741735ed, type: 2}
   - {fileID: 11400000, guid: 82daa795e08feed45b4be83011d4ca73, type: 2}

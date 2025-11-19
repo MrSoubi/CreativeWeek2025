@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa2469d5d061cb4887f91c6c431eb29, type: 3}
   m_Name: Ingredient_Ferrero
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientName: Ferrero
+  ingredientName: FERRERO
   ingredientSprite: {fileID: -5562699340803798852, guid: 08be063b99ecf3d449dc16dd59602692, type: 3}

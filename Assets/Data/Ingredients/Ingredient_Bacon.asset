@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa2469d5d061cb4887f91c6c431eb29, type: 3}
   m_Name: Ingredient_Bacon
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientName: Bacon
+  ingredientName: BACON
   ingredientSprite: {fileID: 4638073604318642339, guid: 5a6f97e920ae586448217bd538bc1b0c, type: 3}

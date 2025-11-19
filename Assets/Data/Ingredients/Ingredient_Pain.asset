@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa2469d5d061cb4887f91c6c431eb29, type: 3}
   m_Name: Ingredient_Pain
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientName: Pain
+  ingredientName: PAIN
   ingredientSprite: {fileID: 43226203873635761, guid: 264783f7ca4d47a44a7a6f18bef83871, type: 3}

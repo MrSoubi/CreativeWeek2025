@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
   m_Name: Recipe_25MDollars
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeName: 25M Dollars
+  recipeName: 25M DOLLARS
   ingredients:
   - {fileID: 11400000, guid: 32702c9eec197af4d876a0c6737a6d37, type: 2}
   - {fileID: 11400000, guid: 82daa795e08feed45b4be83011d4ca73, type: 2}

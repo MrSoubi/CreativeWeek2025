@@ -17,7 +17,7 @@ public class IngredientSpawn : MonoBehaviour
     public void SpawnIngredient(Ingredient ingredient)
     {
         GameObject pickup = Instantiate(ingredientPrefab, transform.position, Quaternion.identity);
-        pickup.GetComponent<IngredientPickup>().Initialize(ingredient);
+        pickup.GetComponent<IngredientPickup>().Initialize(ingredient, spawnLocation);
         pickup.GetComponent<IngredientPickup>().onPickup.AddListener(ingredientManager.OnIngredientPickedUp);
     }
 }

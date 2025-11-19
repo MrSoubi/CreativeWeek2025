@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
   m_Name: Recipe_GodBlessTheUSA
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeName: God Bless The USA
+  recipeName: GOD BLESS THE USA
   ingredients:
   - {fileID: 11400000, guid: ddbcab9d0b8b38d429924fa63b96d599, type: 2}
   - {fileID: 11400000, guid: befb45ae7a91d0645af7eeff41d72e40, type: 2}

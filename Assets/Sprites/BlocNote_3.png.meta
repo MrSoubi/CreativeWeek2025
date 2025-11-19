@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aaf55fc7ca1713d41809f2e85c09a28e
+guid: 481b8bf86bb26a342b331df49a0e4787
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2254511495401051066
-    second: ville_0
+      213: -1734255776951419752
+    second: BlocNote_3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ville_0
+      name: BlocNote_3_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 2161
-        height: 1085
+        width: 412
+        height: 502
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ab31a699242a94f10800000000000000
-      internalID: 2254511495401051066
+      spriteID: 89c34213f8faee7e0800000000000000
+      internalID: -1734255776951419752
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ville_0: 2254511495401051066
+      BlocNote_3_0: -1734255776951419752
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

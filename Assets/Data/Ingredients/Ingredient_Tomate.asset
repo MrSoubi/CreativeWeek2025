@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa2469d5d061cb4887f91c6c431eb29, type: 3}
   m_Name: Ingredient_Tomate
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientName: Tomate
+  ingredientName: TOMATE
   ingredientSprite: {fileID: 8236432160196758994, guid: 69541d036cf6e804dbe554e25af5c6b9, type: 3}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa2469d5d061cb4887f91c6c431eb29, type: 3}
   m_Name: Ingredient_Oignon
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientName: Oignon
+  ingredientName: OIGNON
   ingredientSprite: {fileID: 3182152215066863593, guid: 6e47c282ace2d0949ab9bbd53ebe2974, type: 3}

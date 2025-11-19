@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
   m_Name: Recipe_SandwichLover
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeName: Sandwich Lover
+  recipeName: SANDWICH LOVER
   ingredients:
   - {fileID: 11400000, guid: ddbcab9d0b8b38d429924fa63b96d599, type: 2}
   - {fileID: 11400000, guid: 96f27f6f409a21c44abd5c5b0a353820, type: 2}

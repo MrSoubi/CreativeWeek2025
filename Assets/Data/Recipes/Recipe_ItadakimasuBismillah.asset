@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
   m_Name: Recipe_ItadakimasuBismillah
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeName: Itadakimasu Bismillah
+  recipeName: ITADAKIMASU BISMILLAH
   ingredients:
   - {fileID: 11400000, guid: 3b78ef5f5fa025a4aa93bdcc16432e81, type: 2}
   - {fileID: 11400000, guid: ddbcab9d0b8b38d429924fa63b96d599, type: 2}

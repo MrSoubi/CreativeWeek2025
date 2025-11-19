@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a2725cad9f1184e9ab9554a2dea51b, type: 3}
   m_Name: Recipe_MenuJapanExpo
   m_EditorClassIdentifier: Assembly-CSharp::Recipe
-  recipeName: Menu Japan Expo
+  recipeName: MENU JAPAN EXPO
   ingredients:
   - {fileID: 11400000, guid: 60cd5edfa12f05c46b7c33d4a970544f, type: 2}
   - {fileID: 11400000, guid: dc3d1341a2878c046900d60627d7e960, type: 2}

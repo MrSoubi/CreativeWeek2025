@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caa2469d5d061cb4887f91c6c431eb29, type: 3}
   m_Name: Ingredient_Oeuf
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
-  ingredientName: Oeuf
+  ingredientName: OEUF
   ingredientSprite: {fileID: 3352847314219489144, guid: c4dc1c70c9cc7914b9d1e117d8b3aaa8, type: 3}

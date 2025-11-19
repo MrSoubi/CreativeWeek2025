@@ -11,7 +11,7 @@ public class MetroDoor : MonoBehaviour
     [SerializeField] private RSE_OnPlayerTeleported m_OnPlayerTeleported;
     [SerializeField] private RSE_AskFadeIn m_AskFadeIn;
     [SerializeField] private RSE_AskFadeOut m_AskFadeOut;
-    
+    [SerializeField] private SpawnLocation m_Location;
     private InputAction m_InteractAction;
     private GameObject m_Player;
     
@@ -85,7 +85,7 @@ public class MetroDoor : MonoBehaviour
         
         m_Player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
         m_Player.transform.position = m_Destination.transform.position;
-        m_OnPlayerTeleported.Triggered.Invoke();
+        m_OnPlayerTeleported.Triggered.Invoke(m_Destination.m_Location);
         yield return new WaitForSeconds(.9f);
         m_Player.GetComponent<PlayerController>().UnFreeze();
         HideInteractionPrompt();
