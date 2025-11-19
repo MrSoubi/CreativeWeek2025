@@ -139,6 +139,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    bool isFrozen = false;
+    public void Freeze()
+    {
+        m_Rigidbody2D.linearVelocity = Vector2.zero;
+        m_Rigidbody2D.isKinematic = true;
+        isFrozen = true;
+    }
+
+    public void UnFreeze()
+    {
+        m_Rigidbody2D.isKinematic = false;
+        isFrozen = false;
+    }
+    
     void EnableSliding(InputAction.CallbackContext ctx)
     {
         m_SlidingEnabled = true;
@@ -195,6 +209,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isFrozen) return;
         if (m_Rigidbody2D == null) return;
 
         if (m_Rigidbody2D.linearVelocity.magnitude > 0.1f)

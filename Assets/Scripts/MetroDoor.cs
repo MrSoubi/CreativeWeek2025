@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,10 @@ public class MetroDoor : MonoBehaviour
 {
     [SerializeField] private MetroDoor m_Destination;
     [SerializeField] private InputActionReference m_InteractActionReference;
+    [SerializeField] private GameObject m_UI;
+    [SerializeField] private RSE_OnPlayerTeleported m_OnPlayerTeleported;
+    [SerializeField] private RSE_AskFadeIn m_AskFadeIn;
+    [SerializeField] private RSE_AskFadeOut m_AskFadeOut;
     
     private InputAction m_InteractAction;
     private GameObject m_Player;
@@ -15,14 +20,16 @@ public class MetroDoor : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             m_Player = other.gameObject;
+            DisplayInteractionPrompt();
         }
     }
     
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isTeleporting)
         {
             m_Player = null;
+            HideInteractionPrompt();
         }
     }
 
@@ -39,11 +46,51 @@ public class MetroDoor : MonoBehaviour
         m_InteractAction.Disable();
     }
 
+    private void Start()
+    {
+        HideInteractionPrompt();
+    }
+
+    private void DisplayInteractionPrompt()
+    {
+        if (m_UI != null)
+        {
+            m_UI.SetActive(true);
+        }
+    }
+    
+    private void HideInteractionPrompt()
+    {
+        if (m_UI != null)
+        {
+            m_UI.SetActive(false);
+        }
+    }
+    
     private void OnInteractPerformed(InputAction.CallbackContext context)
     {
         if (m_Player != null)
         {
-            m_Player.transform.position = m_Destination.transform.position;
+            StartCoroutine(TeleportCoroutine());
         }
+    }
+
+    private bool isTeleporting;
+    IEnumerator TeleportCoroutine()
+    {
+        isTeleporting = true;
+        m_AskFadeIn.Call.Invoke();
+        m_Player.GetComponent<PlayerController>().Freeze();
+        yield return new WaitForSeconds(.9f); // Attendre la fin du fondu
+        
+        m_Player.GetComponent<Rigidbody2D>().linearVelocity = Vector2.zero;
+        m_Player.transform.position = m_Destination.transform.position;
+        m_OnPlayerTeleported.Triggered.Invoke();
+        yield return new WaitForSeconds(.9f);
+        m_Player.GetComponent<PlayerController>().UnFreeze();
+        HideInteractionPrompt();
+        m_Player = null;
+        
+        m_AskFadeOut.Call.Invoke();
     }
 }
