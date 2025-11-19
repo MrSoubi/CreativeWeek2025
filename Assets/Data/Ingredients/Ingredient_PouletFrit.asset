@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_PouletFrit
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Poulet Frit
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: -113117510072187123, guid: 4d0741124a0215d41a651cfeaf74b708, type: 3}

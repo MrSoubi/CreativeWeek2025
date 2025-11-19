@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Jambon
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Jambon
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: 2233233318117137568, guid: 211bbb99a78f383469cf562c3b3e9427, type: 3}

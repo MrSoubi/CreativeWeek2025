@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Leonardo
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Leonardo
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: -3100704234652840908, guid: ba079fe90597c45499e61babb1554d01, type: 3}

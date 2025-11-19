@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Bacon
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Bacon
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: 4638073604318642339, guid: 5a6f97e920ae586448217bd538bc1b0c, type: 3}

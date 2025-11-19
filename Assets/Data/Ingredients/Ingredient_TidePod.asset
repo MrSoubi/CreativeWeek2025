@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_TidePod
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Tide Pod
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: 1439035543504908791, guid: 14ab3d03b661e8a4aac319911ee04a02, type: 3}

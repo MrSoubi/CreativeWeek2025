@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Baguette
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Baguette
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: 43226203873635761, guid: 264783f7ca4d47a44a7a6f18bef83871, type: 3}

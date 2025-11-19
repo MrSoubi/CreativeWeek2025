@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Oignon
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Oignon
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: 3182152215066863593, guid: 6e47c282ace2d0949ab9bbd53ebe2974, type: 3}

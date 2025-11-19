@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Monster
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Monster
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: -7482177786666212508, guid: 8a399ff77f4849643a4ccc8d606ae762, type: 3}

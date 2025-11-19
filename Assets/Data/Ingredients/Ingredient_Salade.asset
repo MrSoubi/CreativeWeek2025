@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Salade
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Salade
-  ingredientSprite: {fileID: 21300000, guid: 03a0f27e9b08047889b3f5e7f0c23ff7, type: 3}
+  ingredientSprite: {fileID: 2614539835875231856, guid: aafdc189da649664f84ff20b39b5929a, type: 3}

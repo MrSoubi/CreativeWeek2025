@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Homard
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Homard
-  ingredientSprite: {fileID: 21300000, guid: 401d7863028c84a4988285a5389f1d79, type: 3}
+  ingredientSprite: {fileID: -3276309066600975026, guid: d0625730664d3de48ba9f8d919bf86d5, type: 3}

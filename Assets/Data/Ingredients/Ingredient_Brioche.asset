@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Brioche
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Brioche
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: -7991744502723070528, guid: b14a9531b62db5d469c8c736803c743f, type: 3}

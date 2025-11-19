@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Ingredient_Rat
   m_EditorClassIdentifier: Assembly-CSharp::Ingredient
   ingredientName: Rat
-  ingredientSprite: {fileID: 21300000, guid: b883af5d41f3340b8a4092436de35275, type: 3}
+  ingredientSprite: {fileID: -3578019587575532720, guid: bc063cdf7d05aaa4db2a3fc0aa654c82, type: 3}
