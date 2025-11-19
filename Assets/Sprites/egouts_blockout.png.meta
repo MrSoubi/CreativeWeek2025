@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 402d4ceb52c155f42bf310f5b2a49847
+guid: c4d5bfbfc3b6b3d4fbb3603191a66f37
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9125748021266335699
-    second: metro_blockout (2)_0
+      213: -5933849490038740926
+    second: metro_blockout_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: metro_blockout (2)_0
+      name: metro_blockout_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 1357
-        height: 683
+        width: 1131
+        height: 566
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3d7cd4d997b25ae70800000000000000
-      internalID: 9125748021266335699
+      spriteID: 248ab93e35bb6ada0800000000000000
+      internalID: -5933849490038740926
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      metro_blockout (2)_0: 9125748021266335699
+      metro_blockout_0: -5933849490038740926
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

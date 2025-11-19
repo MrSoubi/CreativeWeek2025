@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: 402d4ceb52c155f42bf310f5b2a49847
+guid: f5033d0801668bf4f88a340670bb2841
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 9125748021266335699
-    second: metro_blockout (2)_0
+      213: 6120616278007092192
+    second: metro_v1_0
+  - first:
+      213: -2577981953561406327
+    second: metro_v1_1
+  - first:
+      213: 5584286335070579904
+    second: metro_v1_2
+  - first:
+      213: -4341871367718479679
+    second: metro_v1_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: metro_blockout (2)_0
+      name: metro_v1_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1357
-        height: 683
+        x: 1478
+        y: 2588
+        width: 35
+        height: 29
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +124,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3d7cd4d997b25ae70800000000000000
-      internalID: 9125748021266335699
+      spriteID: 0e31611931cc0f450800000000000000
+      internalID: 6120616278007092192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: metro_v1_1
+      rect:
+        serializedVersion: 2
+        x: 1512
+        y: 2614
+        width: 41
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 984da9c621b293cd0800000000000000
+      internalID: -2577981953561406327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: metro_v1_2
+      rect:
+        serializedVersion: 2
+        x: 1399
+        y: 2530
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0cc23fdb5de5f7d40800000000000000
+      internalID: 5584286335070579904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: metro_v1_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1450
+        width: 8192
+        height: 1053
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c853bacef29eb3c0800000000000000
+      internalID: -4341871367718479679
       vertices: []
       indices: 
       edges: []
@@ -135,7 +210,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      metro_blockout (2)_0: 9125748021266335699
+      metro_v1_0: 6120616278007092192
+      metro_v1_1: -2577981953561406327
+      metro_v1_2: 5584286335070579904
+      metro_v1_3: -4341871367718479679
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
