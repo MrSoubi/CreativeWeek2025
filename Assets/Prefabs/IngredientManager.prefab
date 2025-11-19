@@ -44,3 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2aef66365d5c1f4da2791caab51b525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::IngredientManager
+  recipes: []
+  ingredientSpawns: []
+  currentRecipe: {fileID: 11400000, guid: ac0000975a76c294481364fadbeebca3, type: 2}

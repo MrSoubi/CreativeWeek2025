@@ -1810,11 +1810,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c351a2b0ae356c74caf5860d482d138a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ArrowManager
-  ingredientInLevel: {fileID: 11400000, guid: cfceb1bb67f1ef84fa074a007ccf6afa, type: 2}
-  arrow: {fileID: 1983824311}
-  debugLogs: 1
-  rotationAxis: 0
-  angleOffsetDegrees: 0
+  currentPickups: {fileID: 11400000, guid: d420a6c31e9c01a458924d5b7f84d8f0, type: 2}
+  currentLocation: {fileID: 11400000, guid: a2ac9a0188341304ea1db16f89722f92, type: 2}
+  arrowIndicator: {fileID: 1983824311}
 --- !u!1001 &127095140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25487,6 +25485,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ac0000975a76c294481364fadbeebca3, type: 2}
     - target: {fileID: 257703306797072538, guid: 1af31e3b2bc565545b61cbcd2ae01b80, type: 3}
+      propertyPath: currentPickups
+      value: 
+      objectReference: {fileID: 11400000, guid: d420a6c31e9c01a458924d5b7f84d8f0, type: 2}
+    - target: {fileID: 257703306797072538, guid: 1af31e3b2bc565545b61cbcd2ae01b80, type: 3}
       propertyPath: ingredientInLevel
       value: 
       objectReference: {fileID: 11400000, guid: cfceb1bb67f1ef84fa074a007ccf6afa, type: 2}
@@ -27847,11 +27849,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2815879347273712671, guid: 139f635d995adbe4da477f96643696c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 413.9
+      value: 26.899994
       objectReference: {fileID: 0}
     - target: {fileID: 2815879347273712671, guid: 139f635d995adbe4da477f96643696c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4
+      value: 8.6
       objectReference: {fileID: 0}
     - target: {fileID: 2815879347273712671, guid: 139f635d995adbe4da477f96643696c0, type: 3}
       propertyPath: m_LocalPosition.z

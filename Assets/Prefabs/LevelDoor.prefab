@@ -247,6 +247,8 @@ MonoBehaviour:
   m_OnPlayerTeleported: {fileID: 11400000, guid: 02c7c5942b3cbf7418b5a7354c0109bb, type: 2}
   m_AskFadeIn: {fileID: 11400000, guid: d67332c76c403b04f8aadae1617eb012, type: 2}
   m_AskFadeOut: {fileID: 11400000, guid: b4639cc61d3f3be40a6b744ca04f3e3b, type: 2}
+  m_Location: 0
+  m_CurrentLocation: {fileID: 11400000, guid: a2ac9a0188341304ea1db16f89722f92, type: 2}
 --- !u!58 &1185925030984613632
 CircleCollider2D:
   m_ObjectHideFlags: 0

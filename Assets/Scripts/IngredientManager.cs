@@ -9,6 +9,7 @@ public class IngredientManager : MonoBehaviour
     [SerializeField] private List<Recipe> recipes;
     [SerializeField] private List<IngredientSpawn> ingredientSpawns;
     [SerializeField] private RSO_CurrentRecipe currentRecipe;
+    public RSO_CurrentPickups currentPickups;
     
     // Spawns encore disponibles (non utilisés par les recettes précédentes)
     private List<IngredientSpawn> availableSpawns;
@@ -17,6 +18,7 @@ public class IngredientManager : MonoBehaviour
 
     private void Start()
     {
+        currentPickups.IngredientPickups = new List<IngredientPickup>();
         // Initialisation de la liste des spawns disponibles
         RebuildAvailableSpawns();
         SetRandomRecipe();
