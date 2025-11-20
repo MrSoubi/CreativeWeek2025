@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private RSE_EnableSliding m_EnableSliding;
     [SerializeField] private RSE_DisableSliding m_DisableSliding;
     [SerializeField] private float m_SlideAutoAttachWindow = 0.25f; // time window after detach where touching another bar auto-attaches
+    [SerializeField] [Tooltip("Angle max (degrés) entre la barre courante et la nouvelle barre pour autoriser la transition de slide.")]
+    private float m_SlideMaxSwitchAngle = 20f; // default: 20 degrees
     
     [Header("Boost")]
     [SerializeField] private LayerMask m_BoostLayer; // layer for boost objects
@@ -304,9 +306,19 @@ public class PlayerController : MonoBehaviour
             m_Rigidbody2D.linearVelocity = m_SlideDirection * m_CurrentSlideSpeed;
 
             // keep checking if the player left the slide collider (for example fell off)
+            // If we no longer overlap the current slide collider, try to switch to a nearby parallel bar
             if (m_CurrentSlideCollider == null || !IsOverlappingCollider(m_CurrentSlideCollider))
             {
-                DetachFromSlide();
+                if (m_CurrentSlideCollider != null)
+                {
+                    TrySwitchSlideBarIfAvailable();
+                }
+
+                // If still not overlapping the (new) current collider, detach
+                if (m_CurrentSlideCollider == null || !IsOverlappingCollider(m_CurrentSlideCollider))
+                {
+                    DetachFromSlide();
+                }
             }
 
             return;
@@ -629,5 +641,63 @@ public class PlayerController : MonoBehaviour
         }
 
         Gizmos.DrawWireSphere(circleCenter, m_GroundCheckRadius);
+    }
+
+    // Attempt to switch from the current slide collider to a nearby slide collider that is roughly parallel.
+    // This allows a smooth continuation of the slide when passing between adjacent bars.
+    private void TrySwitchSlideBarIfAvailable()
+    {
+        if (m_CurrentSlideCollider == null) return;
+        if (m_SlideLayer == 0) return;
+
+        // compute the same check center as the ground / slide checks
+        Vector2 circleCenter;
+        if (m_Collider2D != null)
+        {
+            Bounds b = m_Collider2D.bounds;
+            circleCenter = new Vector2(b.center.x, b.min.y) + Vector2.down * (m_GroundCheckDistance * 0.5f);
+        }
+        else
+        {
+            circleCenter = (Vector2)transform.position + Vector2.down * (m_GroundCheckDistance);
+        }
+
+        // find all slide colliders under the player and evaluate candidates
+        Collider2D[] hits = Physics2D.OverlapCircleAll(circleCenter, m_GroundCheckRadius, m_SlideLayer);
+        if (hits == null || hits.Length == 0) return;
+
+        Vector2 currentDir = m_SlideDirection.normalized;
+
+        foreach (var hit in hits)
+        {
+            if (hit == null) continue;
+            if (hit == m_CurrentSlideCollider) continue; // skip current
+            // respect recent detach cooldown for the same collider
+            if (hit == m_LastDetachedSlideCollider && Time.time - m_LastSlideDetachTime < m_SlideDetachCooldown) continue;
+
+            // determine candidate bar direction
+            Vector3 worldRight = hit.transform.TransformDirection(Vector3.right);
+            Vector2 candidateDir = new Vector2(worldRight.x, worldRight.y).normalized;
+
+            // compute the minimal angle between currentDir and candidateDir (allow opposite direction as still parallel)
+            float angleA = Vector2.Angle(currentDir, candidateDir);
+            float angleB = Vector2.Angle(currentDir, -candidateDir);
+            float minAngle = Mathf.Min(angleA, angleB);
+
+            if (minAngle <= m_SlideMaxSwitchAngle)
+            {
+                // Accept the switch: choose the candidate direction that best aligns with currentDir
+                float dot = Vector2.Dot(currentDir, candidateDir);
+                Vector2 chosen = (dot >= 0f) ? candidateDir : -candidateDir;
+
+                // commit the switch
+                m_CurrentSlideCollider = hit;
+                m_SlideDirection = chosen.normalized;
+
+                // preserve current slide speed and apply along the new direction
+                m_Rigidbody2D.linearVelocity = m_SlideDirection * m_CurrentSlideSpeed;
+                return;
+            }
+        }
     }
 }
