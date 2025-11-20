@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,7 +32,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float m_SlideDetachCooldown = 0.25f; // seconds during which reattachment is blocked after detach
     [SerializeField] private float m_SlideAcceleration = 8f; // how fast speed increases when going downhill
     [SerializeField] private float m_SlideDeceleration = 0f; // how fast speed decreases when going uphill (0 = no decay)
-    [SerializeField] private float m_MinIncomingSpeedForUphill = 1.5f; // minimum incoming speed along bar to allow uphill
     [SerializeField] private RSE_EnableSliding m_EnableSliding;
     [SerializeField] private RSE_DisableSliding m_DisableSliding;
     [SerializeField] private float m_SlideAutoAttachWindow = 0.25f; // time window after detach where touching another bar auto-attaches
@@ -46,6 +46,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D m_Rigidbody2D;
     [SerializeField] private Collider2D m_Collider2D;
 
+    [Header("Animation")]
+    [SerializeField] private Sprite m_Move1Texture;
+    [SerializeField] private Sprite m_Move2Texture;
+    [SerializeField] private Sprite m_SlidingTexture;
+    [SerializeField] private Sprite m_JumpingTexture;
+    [SerializeField] private Sprite m_FallingTexture;
+    [SerializeField] private Sprite m_IdleTexture;
+    
     private InputAction m_JumpAction;
     private InputAction m_MoveAction;
     private InputAction m_SlideAction;
@@ -143,13 +151,13 @@ public class PlayerController : MonoBehaviour
     public void Freeze()
     {
         m_Rigidbody2D.linearVelocity = Vector2.zero;
-        m_Rigidbody2D.isKinematic = true;
+        m_Rigidbody2D.bodyType = RigidbodyType2D.Kinematic;
         isFrozen = true;
     }
 
     public void UnFreeze()
     {
-        m_Rigidbody2D.isKinematic = false;
+        m_Rigidbody2D.bodyType = RigidbodyType2D.Dynamic;
         isFrozen = false;
     }
     
@@ -205,6 +213,52 @@ public class PlayerController : MonoBehaviour
     void MoveCanceled(InputAction.CallbackContext ctx)
     {
         m_MoveInput = Vector2.zero;
+    }
+    
+    [SerializeField] private SpriteRenderer m_SpriteRenderer;
+    private void Update()
+    {
+        bool isMoving = IsGrounded() && Mathf.Abs(m_Rigidbody2D.linearVelocity.x) > 0.1f;
+        bool isJumping = !IsGrounded() && m_Rigidbody2D.linearVelocity.y > 0.1f;
+        bool isFalling = !IsGrounded() && m_Rigidbody2D.linearVelocity.y < -0.1f;
+        bool isSliding = m_IsSliding;
+        bool isIdle = IsGrounded() && Mathf.Abs(m_Rigidbody2D.linearVelocity.x) <= 0.1f;
+        
+        m_SpriteRenderer.flipX = m_Rigidbody2D.linearVelocity.x >= 0.1f;
+        
+        if (isIdle)
+        {
+            m_SpriteRenderer.sprite = m_IdleTexture;
+        }
+
+        if (isFalling)
+        {
+            m_SpriteRenderer.sprite = m_FallingTexture;
+        }
+        
+        if (isJumping)
+        {
+            m_SpriteRenderer.sprite = m_JumpingTexture;
+        }
+        
+        if (isSliding)
+        {
+            m_SpriteRenderer.sprite = m_SlidingTexture;
+        }
+        
+        if (isMoving)
+        {
+            // simple 2-frame walk cycle based on time
+            float t = Time.time * 1.5f; // speed factor
+            if ((Mathf.FloorToInt(t) % 2) == 0)
+            {
+                m_SpriteRenderer.sprite = m_Move1Texture;
+            }
+            else
+            {
+                m_SpriteRenderer.sprite = m_Move2Texture;
+            }
+        }
     }
 
     private void FixedUpdate()
