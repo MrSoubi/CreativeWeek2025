@@ -226,7 +226,7 @@ public class PlayerController : MonoBehaviour
         bool isSliding = m_IsSliding;
         bool isIdle = IsGrounded() && Mathf.Abs(m_Rigidbody2D.linearVelocity.x) <= 0.1f;
         
-        m_SpriteRenderer.flipX = m_Rigidbody2D.linearVelocity.x >= 0.1f;
+        m_SpriteRenderer.flipX = m_Rigidbody2D.linearVelocity.x <= -0.1f;
         
         if (isIdle)
         {
