@@ -12,6 +12,8 @@ public class IngredientPickup : MonoBehaviour
     [SerializeField] private RSE_OnIngredientPickedUp m_OnIngredientPickedUp;
     public SpawnLocation spawnLocation;
     [SerializeField] private RSO_CurrentPickups m_CurrentPickups;
+    public GameObject sfx;
+    
     public void Initialize(Ingredient ingredient, SpawnLocation location)
     {
         this.ingredient = ingredient;
@@ -31,6 +33,7 @@ public class IngredientPickup : MonoBehaviour
             onPickup?.Invoke(ingredient);
             m_OnIngredientPickedUp.onPickup?.Invoke(ingredient);
             m_CurrentPickups.RemovePickup(this);
+            Instantiate(sfx, transform.position, Quaternion.identity);
             animator.SetTrigger("OnPickedUp");
         }
     }

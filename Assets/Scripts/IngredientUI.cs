@@ -19,7 +19,6 @@ public class IngredientUI : MonoBehaviour
     private void OnDisable()
     {
         OnIngredientPickedUp.onPickup.RemoveListener(HandleIngredientPickedUp);
-        currentRecipe.OnValueChanged.RemoveListener(OnRecipeChanged);
     }
     
     private void OnRecipeChanged(Recipe recipe)

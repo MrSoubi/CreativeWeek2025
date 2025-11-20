@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{2c2dc76b-1709-4809-9282-18269f5b7bbd}">
+		<property name="assetPath">
+			<value>zapsplat_pack_cartoon_slide_whistle_wav/zapsplat_pack_cartoon_slide_whistle_wav/zapsplat_cartoon_impact_slide_whistle_fall_into_boing_002_90963.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>3.4012916666666668</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

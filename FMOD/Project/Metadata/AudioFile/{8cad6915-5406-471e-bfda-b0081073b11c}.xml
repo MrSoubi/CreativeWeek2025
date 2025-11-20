@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{8cad6915-5406-471e-bfda-b0081073b11c}">
+		<property name="assetPath">
+			<value>zapsplat_pack_cartoon_slide_whistle_wav/zapsplat_pack_cartoon_slide_whistle_wav/zapsplat_cartoon_slide_whistle_ascend_grow_slow_60889.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>7.898614583333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

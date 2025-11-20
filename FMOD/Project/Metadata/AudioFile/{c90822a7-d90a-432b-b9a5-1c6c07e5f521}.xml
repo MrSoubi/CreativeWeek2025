@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{c90822a7-d90a-432b-b9a5-1c6c07e5f521}">
+		<property name="assetPath">
+			<value>zapsplat_pack_stone_pile_impacts_wav/zapsplat_pack_stone_pile_impacts_wav/zapsplat_impacts_stones_medium_rock_throw_drop_onto_pile_thud_114767.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.79207291666666668</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

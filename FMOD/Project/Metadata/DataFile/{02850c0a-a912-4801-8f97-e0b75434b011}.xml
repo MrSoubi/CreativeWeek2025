@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{02850c0a-a912-4801-8f97-e0b75434b011}">
+		<property name="assetPath">
+			<value>zapsplat_pack_knife_blade_scrapes_wav/__MACOSX/zapsplat_pack_knife_blade_scrapes_wav/._zapsplat_warfare_knife_blade_scrape_on_another_knife_smooth_steady_110442.wav</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

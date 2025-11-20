@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{1308fce7-7d68-472a-b4ba-97273af32f3c}">
+		<property name="assetPath">
+			<value>zapsplat_pack_stone_pile_impacts_wav/zapsplat_pack_stone_pile_impacts_wav/zapsplat_impacts_stones_pile_metal_bar_hit_clang_114781.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>0.77564583333333337</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -181,6 +181,7 @@ MonoBehaviour:
   m_OnIngredientPickedUp: {fileID: 11400000, guid: 6510fd33f0d60a247a0a192535faa3a1, type: 2}
   spawnLocation: 0
   m_CurrentPickups: {fileID: 11400000, guid: d420a6c31e9c01a458924d5b7f84d8f0, type: 2}
+  sfx: {fileID: 9129484764322384993, guid: 9abafe61a9dbf7a4c94a15410e284d15, type: 3}
 --- !u!58 &2801226048510976696
 CircleCollider2D:
   m_ObjectHideFlags: 0

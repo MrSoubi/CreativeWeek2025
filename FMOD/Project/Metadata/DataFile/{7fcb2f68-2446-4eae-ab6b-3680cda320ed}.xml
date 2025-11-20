@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{7fcb2f68-2446-4eae-ab6b-3680cda320ed}">
+		<property name="assetPath">
+			<value>zapsplat_pack_cartoon_slide_whistle_wav/__MACOSX/zapsplat_pack_cartoon_slide_whistle_wav/._zapsplat_cartoon_impact_slide_whistle_fall_into_slip_trip_crash_90965.wav</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

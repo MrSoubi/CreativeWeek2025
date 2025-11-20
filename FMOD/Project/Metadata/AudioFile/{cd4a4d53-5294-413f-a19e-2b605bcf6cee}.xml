@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{cd4a4d53-5294-413f-a19e-2b605bcf6cee}">
+		<property name="assetPath">
+			<value>zapsplat_pack_stone_pile_impacts_wav/zapsplat_pack_stone_pile_impacts_wav/zapsplat_impacts_stones_pile_feet_jump_onto_001_114769.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>1.1897708333333334</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{d1ffe537-7976-41f8-a206-48cce431110e}">
+		<property name="assetPath">
+			<value>zapsplat_pack_metal_friction_wav/zapsplat_pack_metal_friction_wav/skyclad_METLFric_Scrape_Squeak_Moan_Ends_Ascend_into_Scrape_Screech_Short_x2_with_Shing_DI_657.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.3518854166666667</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{a5450b6f-6eb9-48b8-8b5c-7617ab575182}">
+		<property name="assetPath">
+			<value>zapsplat_pack_metal_hoop_wav/zapsplat_pack_metal_hoop_wav/zapsplat_foley_metal_hoop_small_spin_to_stop_on_solid_wood_surface_003_61273.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>4.9201874999999999</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

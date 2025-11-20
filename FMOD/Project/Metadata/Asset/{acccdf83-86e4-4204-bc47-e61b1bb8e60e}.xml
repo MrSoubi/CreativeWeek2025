@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="EncodableAsset" id="{acccdf83-86e4-4204-bc47-e61b1bb8e60e}">
+		<property name="assetPath">
+			<value>zapsplat_pack_metal_hoop_wav/__MACOSX/zapsplat_pack_metal_hoop_wav/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

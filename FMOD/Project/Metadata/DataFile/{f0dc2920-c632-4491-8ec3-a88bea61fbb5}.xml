@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{f0dc2920-c632-4491-8ec3-a88bea61fbb5}">
+		<property name="assetPath">
+			<value>zapsplat_pack_metal_hoop_wav/__MACOSX/zapsplat_pack_metal_hoop_wav/._zapsplat_foley_metal_hoop_small_spin_to_stop_on_solid_wood_surface_001_61271.wav</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

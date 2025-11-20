@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{f78b1165-ec7e-498e-b5de-4db9b9aa9e7f}">
+		<property name="assetPath">
+			<value>zapsplat_pack_cartoon_slide_whistle_wav/zapsplat_pack_cartoon_slide_whistle_wav/zapsplat_cartoon_slide_whistle_fast_ascend_with_vibrato_002_61529.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.0013645833333333</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

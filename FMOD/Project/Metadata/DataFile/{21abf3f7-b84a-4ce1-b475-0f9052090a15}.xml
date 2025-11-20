@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{21abf3f7-b84a-4ce1-b475-0f9052090a15}">
+		<property name="assetPath">
+			<value>zapsplat_pack_elevator_wav/zapsplat_bells_small_bell_service_or_elevator_18043.wav.asd</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

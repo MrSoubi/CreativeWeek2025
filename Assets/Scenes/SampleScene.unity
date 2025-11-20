@@ -9272,6 +9272,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3651262072261831515, guid: ff18aadc903a8fc45b191042006c7716, type: 3}
   m_PrefabInstance: {fileID: 1620289835}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &756650967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 756650969}
+  - component: {fileID: 756650968}
+  m_Layer: 0
+  m_Name: Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &756650968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756650967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: FMODUnity::FMODUnity.StudioEventEmitter
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1611631013
+      Data2: 1325280328
+      Data3: -890038359
+      Data4: -1919482773
+    Path: event:/Level
+  Event: 
+  EventPlayTrigger: 1
+  EventStopTrigger: 2
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  NonRigidbodyVelocity: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
+--- !u!4 &756650969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 756650967}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 30.23509, y: 33.33783, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &756864950
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30219,6 +30282,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_SlideSound
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
       propertyPath: m_JumpingTexture
       value: 
       objectReference: {fileID: -8926250702823451247, guid: 596bb9edde758d24b84b314727c765b0, type: 3}
@@ -30226,6 +30293,70 @@ PrefabInstance:
       propertyPath: m_SlidingTexture
       value: 
       objectReference: {fileID: -5150869301142825515, guid: fd57c6621268e6b4e881d1dea00b26e7, type: 3}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_SlideDetachCooldown
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_JumpAudioReference.Path
+      value: event:/Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_LandAudioReference.Path
+      value: event:/Reception
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_SlideAudioReference.Path
+      value: event:/Slide
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_JumpAudioReference.Guid.Data1
+      value: -1105806395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_JumpAudioReference.Guid.Data2
+      value: 1240076137
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_JumpAudioReference.Guid.Data3
+      value: 2069141675
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_JumpAudioReference.Guid.Data4
+      value: 2084508403
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_LandAudioReference.Guid.Data1
+      value: -298144505
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_LandAudioReference.Guid.Data2
+      value: 1076177281
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_LandAudioReference.Guid.Data3
+      value: -2056800365
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_LandAudioReference.Guid.Data4
+      value: 60152464
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_SlideAudioReference.Guid.Data1
+      value: 1708166218
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_SlideAudioReference.Guid.Data2
+      value: 1142207657
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_SlideAudioReference.Guid.Data3
+      value: 1710197653
+      objectReference: {fileID: 0}
+    - target: {fileID: 2814375870737715306, guid: 139f635d995adbe4da477f96643696c0, type: 3}
+      propertyPath: m_SlideAudioReference.Guid.Data4
+      value: -1766190435
+      objectReference: {fileID: 0}
     - target: {fileID: 2815879347273712671, guid: 139f635d995adbe4da477f96643696c0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 462.3
@@ -30296,3 +30427,4 @@ SceneRoots:
   - {fileID: 1528087151}
   - {fileID: 1767687135}
   - {fileID: 141564309}
+  - {fileID: 756650969}

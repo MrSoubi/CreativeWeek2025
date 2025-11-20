@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{2be6ddd7-21a2-4f38-88f4-94482b7fa0f0}">
+		<property name="assetPath">
+			<value>zapsplat_pack_knife_blade_scrapes_wav/zapsplat_pack_knife_blade_scrapes_wav/zapsplat_warfare_knife_blade_scrape_on_metal_solid_resonate_002_110453.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.4638645833333332</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

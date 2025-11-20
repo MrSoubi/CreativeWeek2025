@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -55,6 +56,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Sprite m_JumpingTexture;
     [SerializeField] private Sprite m_FallingTexture;
     [SerializeField] private Sprite m_IdleTexture;
+
+    [Header("Audio")]
+    [SerializeField] private EventReference m_SlideAudioReference;
+    [SerializeField] private EventReference m_JumpAudioReference;
+    [SerializeField] private EventReference m_LandAudioReference;
+    
+    private FMOD.Studio.EventInstance m_SlideSound;
+    private FMOD.Studio.EventInstance m_JumpSound;
+    private FMOD.Studio.EventInstance m_LandSound;
     
     private InputAction m_JumpAction;
     private InputAction m_MoveAction;
@@ -79,6 +89,9 @@ public class PlayerController : MonoBehaviour
     private float m_LastBoostTime = -Mathf.Infinity;
     private float m_BaseSpeed = 0f;
     private float m_BaseSlideSpeed = 0f;
+
+    private bool WasSlidingLastFrame;
+    private bool WasOnGroundLastFrame;
     
     private void OnEnable()
     {
@@ -205,6 +218,17 @@ public class PlayerController : MonoBehaviour
         v.y = 0f;
         m_Rigidbody2D.linearVelocity = v;
         m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
+        
+        // Play jump sound
+        
+        if (m_JumpSound.isValid())
+        {
+            m_JumpSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            m_JumpSound.release();
+        }
+        
+        m_JumpSound = FMODUnity.RuntimeManager.CreateInstance(m_JumpAudioReference);
+        m_JumpSound.start();
     }
 
     void MovePerformed(InputAction.CallbackContext ctx)
@@ -220,11 +244,40 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SpriteRenderer m_SpriteRenderer;
     private void Update()
     {
+        
         bool isMoving = IsGrounded() && Mathf.Abs(m_Rigidbody2D.linearVelocity.x) > 0.1f;
         bool isJumping = !IsGrounded() && m_Rigidbody2D.linearVelocity.y > 0.1f;
         bool isFalling = !IsGrounded() && m_Rigidbody2D.linearVelocity.y < -0.1f;
         bool isSliding = m_IsSliding;
         bool isIdle = IsGrounded() && Mathf.Abs(m_Rigidbody2D.linearVelocity.x) <= 0.1f;
+        
+        if (isSliding && !WasSlidingLastFrame)
+        {
+            if (m_SlideSound.isValid())
+            {
+                m_SlideSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                m_SlideSound.release();
+            }
+            m_SlideSound = FMODUnity.RuntimeManager.CreateInstance(m_SlideAudioReference);
+            m_SlideSound.setParameterByName("IsSliding", 0f);
+            m_SlideSound.start();
+        }
+        else if (!isSliding && WasSlidingLastFrame)
+        {
+            m_SlideSound.setParameterByName("sliding", 1f);
+        }
+        
+        if (!WasOnGroundLastFrame && IsGrounded())
+        {
+            // Landed this frame
+            if (m_LandSound.isValid())
+            {
+                m_LandSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                m_LandSound.release();
+            }
+            m_LandSound = FMODUnity.RuntimeManager.CreateInstance(m_LandAudioReference);
+            m_LandSound.start();
+        }
         
         m_SpriteRenderer.flipX = m_Rigidbody2D.linearVelocity.x <= -0.1f;
         
@@ -261,6 +314,9 @@ public class PlayerController : MonoBehaviour
                 m_SpriteRenderer.sprite = m_Move2Texture;
             }
         }
+
+        WasSlidingLastFrame = isSliding;
+        WasOnGroundLastFrame = IsGrounded();
     }
 
     private void FixedUpdate()
@@ -516,7 +572,7 @@ public class PlayerController : MonoBehaviour
         // restore gravity
         m_Rigidbody2D.gravityScale = m_PrevGravityScale;
         m_LastSlideDetachTime = Time.time;
-
+        
         StartCoroutine(DisableSlidingAfterDelay(0.1f));
     }
 

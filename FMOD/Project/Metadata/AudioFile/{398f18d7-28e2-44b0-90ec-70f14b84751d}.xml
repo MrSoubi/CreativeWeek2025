@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{398f18d7-28e2-44b0-90ec-70f14b84751d}">
+		<property name="assetPath">
+			<value>zapsplat_pack_metal_hoop_wav/zapsplat_pack_metal_hoop_wav/zapsplat_foley_metal_hoop_small_slide_along_metal_pole_short_008_58363.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>2.1909583333333331</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

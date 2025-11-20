@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{0f489f74-6797-41e1-a7de-5e7bb459f91f}">
+		<property name="assetPath">
+			<value>zapsplat_pack_knife_blade_scrapes_wav/zapsplat_pack_knife_blade_scrapes_wav/ZapSplat-License-Agreement.pdf</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

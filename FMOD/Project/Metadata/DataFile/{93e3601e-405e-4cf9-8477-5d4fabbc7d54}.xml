@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{93e3601e-405e-4cf9-8477-5d4fabbc7d54}">
+		<property name="assetPath">
+			<value>zapsplat_pack_stone_pile_impacts_wav/__MACOSX/zapsplat_pack_stone_pile_impacts_wav/._zapsplat_impacts_stones_pile_metal_bar_hit_clang_hard_deep_114774.wav</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

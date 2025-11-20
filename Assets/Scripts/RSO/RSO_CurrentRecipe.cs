@@ -14,7 +14,7 @@ public class RSO_CurrentRecipe : ScriptableObject
         {
             if (m_Value != value)
             {
-                OnValueChanged.Invoke(value);
+                OnValueChanged?.Invoke(value);
             }
             m_Value = value;
         }

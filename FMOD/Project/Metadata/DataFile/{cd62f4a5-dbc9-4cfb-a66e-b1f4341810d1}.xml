@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{cd62f4a5-dbc9-4cfb-a66e-b1f4341810d1}">
+		<property name="assetPath">
+			<value>zapsplat_pack_elevator_wav/ZapSplat-License-Agreement.pdf</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="DataFile" id="{e17d6729-914d-49fc-8c8e-ad3371e213a5}">
+		<property name="assetPath">
+			<value>zapsplat_pack_small_grinding_tool_wav/__MACOSX/zapsplat_pack_small_grinding_tool_wav/._zapsplat_industrial_power_tool_grinder_on_metal_buzz_004_38810.wav</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{a283c85b-46d4-4fea-a041-57da810ee0d8}</destination>
+		</relationship>
+	</object>
+</objects>
