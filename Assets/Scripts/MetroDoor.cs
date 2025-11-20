@@ -91,6 +91,7 @@ public class MetroDoor : MonoBehaviour
         m_CurrentLocation.CurrentLocation = m_Destination.m_Location;
         m_Player.GetComponent<PlayerController>().UnFreeze();
         HideInteractionPrompt();
+        isTeleporting = false;
         m_Player = null;
         
         m_AskFadeOut.Call.Invoke();
