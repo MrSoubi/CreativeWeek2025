@@ -5,6 +5,7 @@ using UnityEngine.Events;
 [Serializable]
 public class IngredientPickup : MonoBehaviour
 {
+    public Animator animator;
     public Ingredient ingredient;
     public UnityEvent<Ingredient> onPickup;
     [SerializeField] private SpriteRenderer ingredientSprite;
@@ -19,14 +20,23 @@ public class IngredientPickup : MonoBehaviour
         m_CurrentPickups.AddPickup(this);
     }
     
+    bool pickedUp = false;
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (pickedUp) return;
+        
         if (other.CompareTag("Player"))
         {
+            pickedUp = true;
             onPickup?.Invoke(ingredient);
             m_OnIngredientPickedUp.onPickup?.Invoke(ingredient);
             m_CurrentPickups.RemovePickup(this);
-            Destroy(gameObject);
+            animator.SetTrigger("OnPickedUp");
         }
+    }
+
+    public void OnAnimationFinished()
+    {
+        Destroy(gameObject);
     }
 }

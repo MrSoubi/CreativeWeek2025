@@ -8,15 +8,23 @@ public class IngredientUI : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Image crossedImage;
     [SerializeField] private RSE_OnIngredientPickedUp OnIngredientPickedUp;
     private Ingredient currentIngredient;
+    public RSO_CurrentRecipe currentRecipe;
     
     private void OnEnable()
     {
         OnIngredientPickedUp.onPickup.AddListener(HandleIngredientPickedUp);
+        currentRecipe.OnValueChanged.AddListener(OnRecipeChanged);
     }
     
     private void OnDisable()
     {
         OnIngredientPickedUp.onPickup.RemoveListener(HandleIngredientPickedUp);
+        currentRecipe.OnValueChanged.RemoveListener(OnRecipeChanged);
+    }
+    
+    private void OnRecipeChanged(Recipe recipe)
+    {
+        Destroy(gameObject);
     }
     
     public void SetIngredient(Ingredient ingredient)

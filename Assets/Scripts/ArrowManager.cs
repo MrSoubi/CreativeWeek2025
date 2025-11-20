@@ -12,7 +12,7 @@ public class ArrowManager : MonoBehaviour
 
     private void Start()
     {
-        currentLocation.CurrentLocation = SpawnLocation.Ville;
+        currentLocation.CurrentLocation = SpawnLocation.Chinatown;
         StartCoroutine(PostInit());
     }
     

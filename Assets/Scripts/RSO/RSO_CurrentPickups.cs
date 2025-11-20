@@ -5,6 +5,8 @@ using UnityEngine.Events;
 [CreateAssetMenu(fileName = "RSO_CurrentPickups", menuName = "Scriptable Objects/RSO_CurrentPickups")]
 public class RSO_CurrentPickups : ScriptableObject
 {
+    
+    
     List<IngredientPickup> ingredientPickups;
     public UnityEvent<List<IngredientPickup>> OnPickupsChanged;
     
@@ -42,4 +44,12 @@ public class RSO_CurrentPickups : ScriptableObject
         OnPickupsChanged?.Invoke(ingredientPickups);
         Debug.Log("Current Pickups changed. Total pickups: " + ingredientPickups.Count);
     }
+    
+#if UNITY_EDITOR
+    private void OnDisable()
+    {
+        IngredientPickups = new List<IngredientPickup>();
+        UnityEditor.EditorUtility.SetDirty(this);
+    }
+#endif
 }
