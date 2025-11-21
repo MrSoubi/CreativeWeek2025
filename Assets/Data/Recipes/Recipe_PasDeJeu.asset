@@ -16,4 +16,4 @@ MonoBehaviour:
   ingredients:
   - {fileID: 11400000, guid: 571690fc309bc924d9cbfb2f8e46e703, type: 2}
   - {fileID: 11400000, guid: fac37dc7af3f6194483122ba6eddec69, type: 2}
-  recipeSprite: {fileID: 0}
+  recipeSprite: {fileID: 21300000, guid: 963511934d91a9f4397adf743fc50bed, type: 3}
