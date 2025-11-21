@@ -14,8 +14,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] [Range(0f, 1f)] private float m_AirControlMultiplier = 0.5f;
     [SerializeField] [Range(0f, 1f)] private float m_CoastMultiplier = 0.2f; // how much we coast when no input (0 = no coast, 1 = instant stop)
 
+    [Header("Air Control")]
+    [SerializeField] [Tooltip("Activer un boost vertical en l'air lorsque le joystick est poussé vers le bas (accélère la chute).")]
+    private bool m_EnableAirDownBoost = true;
+    [SerializeField] [Tooltip("Seuil vertical (valeur négative) du joystick en dessous duquel le boost s'active (ex: -0.5).")]
+    private float m_AirDownThreshold = -0.5f;
+    [SerializeField] [Tooltip("Multiplicateur appliqué à la gravité du Rigidbody2D lorsque le boost est actif (ex: 2.0 = gravité doublée).")]
+    private float m_AirDownGravityMultiplier = 2.0f;
+    [SerializeField] [Tooltip("Multiplicateur optionnel appliqué à la vitesse de chute (valeur >1 augmente la vitesse de chute instantanément lorsque déjà en train de tomber).")]
+    private float m_AirDownMaxFallSpeedMultiplier = 1.5f;
+    // stocke la gravité d'origine pour restaurer proprement
+    private float m_BaseGravityScale = 1f;
+
     [Header("Jump")]
     [SerializeField] private float m_JumpForce = 12f;
+    [SerializeField] [Tooltip("Nombre maximum de sauts consécutifs (1 = pas de double jump, 2 = double jump)")]
+    private int m_MaxJumps = 2;
+    [SerializeField] [Tooltip("Force appliquée pour le saut en cours d'air (double jump). Si à 0, sera prise égale à m_JumpForce.")]
+    private float m_DoubleJumpForce = 0f;
 
     [Header("Input")]
     [SerializeField] private InputActionReference m_JumpActionReference;
@@ -65,11 +81,14 @@ public class PlayerController : MonoBehaviour
     private FMOD.Studio.EventInstance m_SlideSound;
     private FMOD.Studio.EventInstance m_JumpSound;
     private FMOD.Studio.EventInstance m_LandSound;
-    
+
     private InputAction m_JumpAction;
     private InputAction m_MoveAction;
     private InputAction m_SlideAction;
 
+    // jump state
+    private int m_JumpsRemaining = 0;
+    
     // runtime state
     private Vector2 m_MoveInput = Vector2.zero;
 
@@ -141,9 +160,22 @@ public class PlayerController : MonoBehaviour
                 Debug.LogWarning("PlayerController: Collider2D not assigned and not found on the GameObject. Ground check may be unreliable.");
         }
 
+        // store base gravity scale for air-down boost (do this after we have ensured rigidbody exists)
+        if (m_Rigidbody2D != null)
+        {
+            m_BaseGravityScale = m_Rigidbody2D.gravityScale;
+        }
+        
         // store base speeds for boost restore
         m_BaseSpeed = m_Speed;
         m_BaseSlideSpeed = m_SlideSpeed;
+
+        // initialize jump counts and ensure double jump force default
+        m_JumpsRemaining = m_MaxJumps;
+        if (m_DoubleJumpForce <= 0f)
+        {
+            m_DoubleJumpForce = m_JumpForce;
+        }
     }
 
     private void OnDisable()
@@ -207,26 +239,49 @@ public class PlayerController : MonoBehaviour
             DetachFromSlide();
 
             // Apply jump impulse (use same as normal jump)
+            // Reset vertical velocity then apply impulse for consistent jump height
+            Vector2 vSlide = m_Rigidbody2D.linearVelocity;
+            vSlide.y = 0f;
+            m_Rigidbody2D.linearVelocity = vSlide;
             m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
+            // consume one jump from the pool (we consider this the first jump)
+            m_JumpsRemaining = Mathf.Max(0, m_MaxJumps - 1);
+
+            // Play jump sound
+            if (m_JumpSound.isValid())
+            {
+                m_JumpSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                m_JumpSound.release();
+            }
+            m_JumpSound = FMODUnity.RuntimeManager.CreateInstance(m_JumpAudioReference);
+            m_JumpSound.start();
+
             return;
         }
 
-        if (!IsGrounded()) return;
+        // If we have no jumps left, do nothing
+        if (m_JumpsRemaining <= 0) return;
+
+        bool grounded = IsGrounded();
+
+        // choose force depending on whether this is the ground jump or an air (double) jump
+        float force = grounded ? m_JumpForce : m_DoubleJumpForce;
 
         // Reset vertical velocity then apply impulse for consistent jump height
         Vector2 v = m_Rigidbody2D.linearVelocity;
         v.y = 0f;
         m_Rigidbody2D.linearVelocity = v;
-        m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
-        
+        m_Rigidbody2D.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+
+        // consume one jump
+        m_JumpsRemaining = Mathf.Max(0, m_JumpsRemaining - 1);
+
         // Play jump sound
-        
         if (m_JumpSound.isValid())
         {
             m_JumpSound.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             m_JumpSound.release();
         }
-        
         m_JumpSound = FMODUnity.RuntimeManager.CreateInstance(m_JumpAudioReference);
         m_JumpSound.start();
     }
@@ -324,6 +379,38 @@ public class PlayerController : MonoBehaviour
         if (isFrozen) return;
         if (m_Rigidbody2D == null) return;
 
+        // --- Air-down vertical boost: si en l'air et stick bas, augmenter gravité et accélérer la chute ---
+        if (!m_IsSliding && !IsGrounded() && m_EnableAirDownBoost && m_MoveInput.y < m_AirDownThreshold)
+        {
+            // applique une gravité plus forte
+            m_Rigidbody2D.gravityScale = m_BaseGravityScale * m_AirDownGravityMultiplier;
+
+            // si on tombe déjà (v.y < 0), on peut augmenter la vitesse de chute instantanément
+            if (m_Rigidbody2D.linearVelocity.y < 0f && m_AirDownMaxFallSpeedMultiplier > 1f)
+            {
+                Vector2 fallVel = m_Rigidbody2D.linearVelocity;
+                // augmenter la vitesse négative (faire plus petit) en multipliant la composante y
+                // note: fallVel.y est négatif quand on tombe, multiplier par >1 rend la valeur plus négative;
+                // Mathf.Min permet de ne pas augmenter la composante si cela ne réduit pas la valeur actuelle.
+                fallVel.y = Mathf.Min(fallVel.y * m_AirDownMaxFallSpeedMultiplier, fallVel.y);
+                m_Rigidbody2D.linearVelocity = fallVel;
+            }
+        }
+        else
+        {
+            // restaurer gravité seulement si on n'est pas en slide (slide gère sa propre gravité) et que la valeur actuelle diffère
+            if (!m_IsSliding && !Mathf.Approximately(m_Rigidbody2D.gravityScale, m_BaseGravityScale))
+            {
+                m_Rigidbody2D.gravityScale = m_BaseGravityScale;
+            }
+        }
+
+        // Reset available jumps when on ground
+        if (IsGrounded())
+        {
+            m_JumpsRemaining = m_MaxJumps;
+        }
+        
         if (m_Rigidbody2D.linearVelocity.magnitude > 0.1f)
         {
             m_LastVelocity = m_Rigidbody2D.linearVelocity;
@@ -389,11 +476,11 @@ public class PlayerController : MonoBehaviour
         float accel = m_Acceleration * Time.fixedDeltaTime;
         if (!IsGrounded()) accel *= m_AirControlMultiplier;
 
-        // If there's no horizontal input, reduce the accel so the player coasts (roller-skate feel)
-        if (Mathf.Approximately(m_MoveInput.x, 0f))
-        {
-            accel *= m_CoastMultiplier;
-        }
+         // If there's no horizontal input, reduce the accel so the player coasts (roller-skate feel)
+         if (Mathf.Approximately(m_MoveInput.x, 0f))
+         {
+             accel *= m_CoastMultiplier;
+         }
 
         float currentX = m_Rigidbody2D.linearVelocity.x;
         float newX = Mathf.MoveTowards(currentX, target, accel);
