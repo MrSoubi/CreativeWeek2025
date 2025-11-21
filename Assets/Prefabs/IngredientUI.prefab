@@ -129,7 +129,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2496661358789802901, guid: 42c43e112e36073489b5ec3b2ab9f25d, type: 3}
+  m_Sprite: {fileID: -2623933441572058367, guid: 6772bcdb5b642ba4f88df20257ab02a6, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -329,6 +329,7 @@ MonoBehaviour:
   ingredientImage: {fileID: 4019325590371187554}
   crossedImage: {fileID: 7442870926797222661}
   OnIngredientPickedUp: {fileID: 11400000, guid: 6510fd33f0d60a247a0a192535faa3a1, type: 2}
+  currentRecipe: {fileID: 0}
 --- !u!1 &8711903210823997538
 GameObject:
   m_ObjectHideFlags: 0
